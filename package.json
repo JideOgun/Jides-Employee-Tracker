@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "name": "jides-employee-tracker",
+  "description": "---\r 1. [DESCRIPTION](#description)\r 2. [LICENSE](#licenses)\r 3. [INSTALLATION](#installation-instructions)\r 4. [USAGE](#usage-information)\r 5. [CONTRIBUTION GUIDELINES](#contribution-guidelines)\r 6. [TEST INSTRUCTIONS](#test-instructions)\r 7. [CREDITS](#credits)\r 8. [QUESTIONS](#questions)\r ---\r  ## DESCRIPTION\r  command-line application that manages a company's employee database, using Node.js, Inquirer, and MySQL.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JideOgun/Jides-Employee-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JideOgun/Jides-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/JideOgun/Jides-Employee-Tracker#readme"
+}

@@ -1,0 +1,22 @@
+INSERT INTO employee_info(first_name, last_name)
+VALUES
+('Romelu', 'Lukaku'),
+('Mason', 'Mount'),
+('Hakim', 'Ziyech'),
+('Marcos', 'Alonso'),
+('Thiago', 'Silva'),
+('Benjamin', 'Mendy'),
+('Andreas', 'Christensen'),
+('Antonio', 'Rudiger'),
+('Christian', 'Pulisic'),
+('Kai', 'Havertz'),
+('Callum', 'Hudson-Odoi'),
+('Mateo', 'Kovacic'),
+('Jorginho', 'Frello'),
+('Reece', 'James'),
+('Kepa', 'Arrizabalaga'),
+('Malang', 'Sarr'),
+('Trevor', 'Chalobah'),
+('Marcus', 'Bettinelli'),
+('Ngolo', 'Kante'),
+('Timo', 'Werner')
