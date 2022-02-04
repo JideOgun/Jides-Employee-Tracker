@@ -1,4 +1,21 @@
-INSERT INTO employee_info(first_name, last_name)
+
+INSERT INTO department(name)
+VALUES
+('Field Players'),
+('Medical Staff'),
+('Coaching Staff');
+
+
+INSERT INTO role(title, salary, manager)
+VALUES
+('Center Forward', 100000, 0),
+('Midfielder', 50000, 0),
+('Goal Keeper', 20000, 0),
+('Physical Therapist', 5000, 0),
+('First team Coach', 150000, 1);
+
+
+INSERT INTO employee(first_name, last_name)
 VALUES
 ('Romelu', 'Lukaku'),
 ('Mason', 'Mount'),
@@ -19,4 +36,6 @@ VALUES
 ('Trevor', 'Chalobah'),
 ('Marcus', 'Bettinelli'),
 ('Ngolo', 'Kante'),
-('Timo', 'Werner')
+('Timo', 'Werner'),
+('Tomas', 'Tuchel'),
+('Petr', 'Cech');
