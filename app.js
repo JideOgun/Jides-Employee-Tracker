@@ -34,7 +34,7 @@ promptStart().then((answers) => {
               console.table(rows);
             });
         } else if (answers.startlist === 'View all Employees by department') {
-          const sql = ``;
+          const sql = `SELECT * FROM department`;
           db.query(sql, (err,rows) => {
             if(err) {
               console.log(err);
