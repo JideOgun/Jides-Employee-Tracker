@@ -180,7 +180,7 @@ promptStart().then((answers) => {
         } else if // VIEW ALL EMPLOYEES
         (answers.startlist === 'View all Employees') {
 
-          const sql = `select employee.employee_id, role.role_id, employee.first_name, employee.last_name, department.name, 
+          const sql = `select employee.employee_id, role.role_id, role.title, employee.first_name, employee.last_name, department.name, 
           role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id INNER JOIN department ON role.department_id = department.dept_id;`;
           db.query(sql, (err, rows) => {
             if(err) {

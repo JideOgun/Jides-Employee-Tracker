@@ -8,14 +8,14 @@ VALUES
 
 INSERT INTO role(title, salary, manager, department_id)
 VALUES
-('Center Forward', 100000, 'NO', 1),
-('Midfielder', 5000, 'NO', 1),
-('Defender', 40000, 'NO', 1),
-('Goal Keeper', 20000, 'NO', 1),
-('Fitness Coach', 5000, 'NO', 2),
-('Team Doctor', 10000, 'YES', 2),
-('Players Coach', 15000, 'YES', 3),
-('First Team Coach', 150000, 'YES', 3);
+('Center Forward', 100000, 'Thomas Tuchel', 1),
+('Midfielder', 75000, 'Thomas Tuchel', 1),
+('Defender', 60000, 'Thomas Tuchel', 1),
+('Goal Keeper', 50000, 'Thomas Tuchel', 1),
+('Fitness Coach', 15000, 'Petr Cech', 2),
+('Team Doctor', 25000, NULL, 2),
+('Players Coach', 30000, NULL, 3),
+('First Team Coach', 150000, NULL, 3);
 
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id, department_id)
@@ -48,7 +48,7 @@ VALUES
 ('Ross', 'Barkley',  2, NULL, 1),
 ('Petr', 'Cech', 7, 27, 3),
 ('Adam', 'Burrow', 5, NULL, 3),
-('Henrique', 'Hilario', 7, NULL, 3);
+('Henrique', 'Hilario', 5, NULL, 3);
 
 INSERT INTO managers(manager_name)
 VALUES
