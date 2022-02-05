@@ -8,14 +8,14 @@ VALUES
 
 INSERT INTO role(title, salary, manager, department_id)
 VALUES
-('Center Forward', 100000, 0, 1),
-('Midfielder', 50000, 0, 1),
-('Defender', 40000, 0, 1),
-('Goal Keeper', 20000, 0, 1),
-('Fitness Coach', 5000, 0, 2),
-('Team Doctor', 10000, 1, 2),
-('Players Coach', 15000, 0, 3),
-('First Team Coach', 150000, 1, 3);
+('Center Forward', 100000, 'NO', 1),
+('Midfielder', 5000, 'NO', 1),
+('Defender', 40000, 'NO', 1),
+('Goal Keeper', 20000, 'NO', 1),
+('Fitness Coach', 5000, 'NO', 2),
+('Team Doctor', 10000, 'YES', 2),
+('Players Coach', 15000, 'YES', 3),
+('First Team Coach', 150000, 'YES', 3);
 
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id, department_id)
@@ -41,7 +41,7 @@ VALUES
 ('Marcus', 'Bettinelli', 4, NULL, 1),
 ('Ngolo', 'Kante', 2, NULL, 1),
 ('Timo', 'Werner', 1, NULL, 1),
-('Tomas', 'Tuchel', 8, 22, 3),
+('Thomas', 'Tuchel', 8, 22, 3),
 ('Paco', 'Biosca', 6, 23, 2),
 ('Ruben', 'Loftus-Cheek', 2, NULL, 1),
 ('Saul', 'Niguez', 2, NULL, 1),
@@ -49,3 +49,9 @@ VALUES
 ('Petr', 'Cech', 7, 27, 3),
 ('Adam', 'Burrow', 5, NULL, 3),
 ('Henrique', 'Hilario', 7, NULL, 3);
+
+INSERT INTO managers(manager_name)
+VALUES
+('Thomas Tuchel'),
+('Petr Cech'),
+('Paco Biosca');
