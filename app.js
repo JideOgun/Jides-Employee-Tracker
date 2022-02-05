@@ -15,169 +15,41 @@ return inquirer.prompt([
         type: 'list',
         name: 'startlist',
         message: 'What would you like to do? (Select one of the following)',
-        choices: ['View all departments', 'View all roles', 'View all Employees', 'View all Employees by department', 'View all Employees by manager', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role']
+        choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role']
     }
 ]).then((answers) => {
   // VIEW ALL DEPARTMENTS
-  if(answers.startlist === 'View all departments') {
-    promptDept().then(deptchoice => {
-      // VIEW ALL DEPARTMENTS BY FIELD PLAYERS
-      if(deptchoice.dept === 'Field Players') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name, employee.role_id,
-         role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.department_id = 1;`;
-      db.query(sql, (err, rows) => {
-        if(err) {
-          console.log(err);
-          return;
-        }
-        console.table(rows);
-      }); // VIEW ALL DEPARTMENTS BY MEDICAL STAFF
-      } else if (deptchoice.dept === 'Medical Staff') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name, employee.role_id,
-         role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.department_id = 2;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        }); // VIEW ALL DEPARTMENTS BY COACHING STAFF
-      } else if (deptchoice.dept === 'Coaching Staff') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name, employee.role_id,
-         role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.department_id = 3;`;
-      db.query(sql, (err, rows) => {
-        if(err) {
-          console.log(err);
-          return;
-        }
-        console.table(rows);
-      });
-      }
-      
-    });
-      
-  } // VIEW ALL ROLES SECTIONS
+if(answers.startlist === 'View all departments') {
+     displayDept();    
+  } // VIEW ALL ROLES
   else if (answers.startlist === 'View all roles') {
-    promptRole().then(roleChoices => {
-      // VIEW ROLES BY CENTER FORWARDS
-      if(roleChoices.roles === 'Center Forward') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-         role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 1;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      }  // VIEW ROLES BY MIDFIELDERS
-      else if (roleChoices.roles === 'Midfielder') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 2;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY DEFENDERS
-      else if (roleChoices.roles === 'Defender') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 3;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY GOAL KEEPERS
-      else if (roleChoices.roles === 'Goal Keeper') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 4;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY FITNESS COACH
-      else if (roleChoices.roles === 'Fitness Coach') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 5;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY TEAM DOCTOR
-      else if (roleChoices.roles === 'Team Doctor') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 6;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY PLAYERS COACH
-      else if (roleChoices.roles === 'Players Coach') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 7;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      } // VIEW ROLES BY FIRST TEAM COACH
-      else if (roleChoices.roles === 'First Team Coach') {
-        const sql = `SELECT employee.employee_id, role.role_id, employee.first_name, employee.last_name,
-        role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id WHERE role.role_id = 8;`;
-        db.query(sql, (err, rows) => {
-          if(err) {
-            console.log(err);
-            return;
-          }
-          console.table(rows);
-        });
-      }
-    });
-  } else if // VIEW ALL EMPLOYEES
-  (answers.startlist === 'View all Employees') {
+    displayRole();
+  } // VIEW ALL EMPLOYEES
+  else if(answers.startlist === 'View all Employees') {
+   displayEmployees();
+  } // ADD A DEPARTMENT
+  else if (answers.startlist === 'Add Departments') {
+    addDept();
+  } // ADD  A NEW ROLE
+  else if (answers.startlist === 'Add a role') {
+    addRole();
+  } // ADD AN EMPLOYEE
+  else if (answers.startlist === 'Add an Employee') {
+    addEmployee();
+  }
+});
+};
 
-    const sql = `select employee.employee_id, role.role_id, role.title, employee.first_name, employee.last_name, department.name, 
-    role.manager, role.salary FROM role INNER JOIN employee ON role.role_id = employee.role_id INNER JOIN department ON role.department_id = department.dept_id;`;
+const displayRole = () => {
+  const sql = `SELECT role.role_id, role.title, role.salary, department.name from role INNER JOIN department on role.department_id = department.dept_id;`;
     db.query(sql, (err, rows) => {
       if(err) {
         console.log(err);
         return;
       }
-      console.table(rows);
-      restart();
-    });
-    
-  }
- 
-});
-};
-
-const promptRole = () => {
-  return inquirer.prompt([
-  {
-    type: 'list',
-    name: 'roles',
-    message: 'Select a role from the following',
-    choices: ['Center Forward','Midfielder', 'Defender','Goal Keeper','Fitness Coach','Team Doctor', 'Players Coach', 'First Team Coach']
-  }
-  ]
-  ); 
+    console.table(rows);
+    restart();
+  }); 
 };
 
  const restart = () => {
@@ -197,28 +69,169 @@ const promptRole = () => {
   };
 
 
-const promptDept = () => {
-return inquirer.prompt([
+const displayDept = () => {
+ const sql = `SELECT * from department`;
+  db.query(sql, (err, rows) => {
+    if(err) {
+      console.log(err);
+      return;
+    }
+  console.table(rows);
+  restart();
+});
+};
+
+const displayEmployees = () => {
+  const sql = `SELECT *, role.salary, role.title FROM employee 
+  INNER JOIN role ON employee.role_id = role.role_id; `;
+  db.query(sql, (err, rows) => {
+    if(err) {
+      console.log(err);
+      return;
+    }
+  console.table(rows);
+  restart();
+}); 
+};
+
+
+// ADD DEPARTMENT FUNCTION
+const addDept = () => {
+  
+ let sql_query1 = `SELECT * FROM department;`;
+ db.query(sql_query1, async (err, rows) => {
+if(err) {
+  console.log(err);
+  return;
+}
+
+   const deptAnswers = await inquirer.prompt([
+     {
+       type: 'Input',
+       name: 'DeptId',
+       message: 'Add a new department id'
+     },
+     {
+       type: 'Input',
+       name: 'DeptName',
+       message: 'Add a new department name'
+     }
+   ]);
+   let sql_query2 = 'INSERT INTO department VALUES(?, ?)';
+   let params = [deptAnswers.DeptId, deptAnswers.DeptName];
+   db.query(sql_query2, params, (err_1, rows_1) => {
+     if (err_1) {
+       console.log(err_1);
+     }
+     console.log(`${params[1]} has been added to the department!`);
+   });
+   restart();
+ });
+};
+
+// ADD A ROLE FUNCTION
+const addRole = () => {
+let sql_query1 = `SELECT * FROM role`;
+db.query(sql_query1, (err, rows) => {
+if(err) {
+  console.log(err);
+  return;
+}
+
+inquirer.prompt([
   {
-    type: 'list',
-    name: 'dept',
-    message: 'Select one of the following departments',
-    choices: ['Field Players', 'Medical Staff', 'Coaching Staff']
+    type: 'Input',
+    name: 'roleId',
+    message: 'What is the Id of the role ?'
   },
-]);
-};
-
-const promptAddDept = () => {
-return inquirer.prompt([
   {
-    type: 'confirm',
-    name: 'addDept',
-    message: 'Would you like to add a department?',
-    default: false
-
+    type: 'Input',
+    name: 'roleTitle',
+    message: 'What is the title of the role?'
+  },
+  {
+    type: 'Input',
+    name: 'roleSalary',
+    message: 'What is the salary for this role?'
+  },
+  {
+    type: 'Input',
+    name: 'roleManager',
+    message: 'Who is the manager for this role?'
+  },
+  {
+    type: 'Input',
+    name: 'roleDeptId',
+    message: 'What is the deptId for this role?'
   }
-]);
+]).then(roleAnswers => {
+  let sql_query2 = `INSERT INTO role VALUES(?, ?, ?, ?, ?)`;
+  let params = [roleAnswers.roleId, roleAnswers.roleTitle, roleAnswers.roleSalary, roleAnswers.roleManager, roleAnswers.roleDeptId];
+  db.query(sql_query2, params, (err, rows) => {
+    if(err) {console.log(err);}
+    console.log(`${roleAnswers.roleTitle} has been added to roles`);
+  });
+  restart();
+});
+});
 };
+
+// ADD AN EMPLOYEE FUNCTION
+const addEmployee = () => {
+  let sql_query1 = `SELECT * FROM employee`;
+  db.query(sql_query1, (err, rows) => {
+  if(err) {
+    console.log(err);
+    return;
+  }
+  
+  inquirer.prompt([
+    {
+      type: 'Input',
+      name: 'employeeId',
+      message: 'What is the employee Id ?'
+    },
+    {
+      type: 'Input',
+      name: 'fname',
+      message: 'What is the employee first name ?'
+    },
+    {
+      type: 'Input',
+      name: 'lname',
+      message: 'What is the employee last name?'
+    },
+    {
+      type: 'Input',
+      name: 'roleId',
+      message: 'What is the employee role id?'
+    },
+    {
+      type: 'Input',
+      name: 'managerId',
+      message: 'What is the manager id?'
+    },
+    {
+      type: 'Input',
+      name: 'deptId',
+      message: 'What is the employee deptId?'
+    }
+  ]).then(empAnswers => {
+    let sql_query2 = `INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?)`;
+    let params = [empAnswers.employeeId, empAnswers.fname, empAnswers.lname, empAnswers.roleId, empAnswers.managerId, empAnswers.deptId];
+    db.query(sql_query2, params, (err, rows) => {
+      if(err) {console.log(err);}
+      console.log(`${empAnswers.fname} ${empAnswers.lname} has been added to the employees`);
+    });
+    restart();
+  });
+  });
+  };
+
+
+
+
+
 
 const Quit = () => {
 console.log('Goodbye!');

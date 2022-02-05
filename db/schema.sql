@@ -28,8 +28,3 @@ CREATE TABLE employee (
     CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(employee_id) ON DELETE CASCADE,
     CONSTRAINT fk_empdept FOREIGN KEY (department_id) REFERENCES department(dept_id) ON DELETE CASCADE
 );
-
-CREATE TABLE managers (
-    manager_name VARCHAR(30)
-    -- CONSTRAINT fk_mgrName FOREIGN KEY (manager_name) REFERENCES employee(employee_id) ON DELETE CASCADE  
-);

@@ -12,9 +12,9 @@ VALUES
 ('Midfielder', 75000, 'Thomas Tuchel', 1),
 ('Defender', 60000, 'Thomas Tuchel', 1),
 ('Goal Keeper', 50000, 'Thomas Tuchel', 1),
-('Fitness Coach', 15000, 'Petr Cech', 2),
+('Fitness Coach', 15000, 'Petr Cech', 3),
 ('Team Doctor', 25000, NULL, 2),
-('Players Coach', 30000, NULL, 3),
+('Players Coach', 30000, 'Thomas Tuchel', 3),
 ('First Team Coach', 150000, NULL, 3);
 
 
@@ -49,9 +49,3 @@ VALUES
 ('Petr', 'Cech', 7, 27, 3),
 ('Adam', 'Burrow', 5, NULL, 3),
 ('Henrique', 'Hilario', 5, NULL, 3);
-
-INSERT INTO managers(manager_name)
-VALUES
-('Thomas Tuchel'),
-('Petr Cech'),
-('Paco Biosca');
