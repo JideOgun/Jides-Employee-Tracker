@@ -36,6 +36,8 @@ if(answers.startlist === 'View all departments') {
   } // ADD AN EMPLOYEE
   else if (answers.startlist === 'Add an Employee') {
     addEmployee();
+  } else if (answers.startlist === 'Update Employee Role') {
+    updateEmp();
   }
 });
 };
@@ -227,6 +229,68 @@ const addEmployee = () => {
   });
   });
   };
+
+  // UPDATE EMPLOYEE FUNCTION
+  const updateEmp = () => {
+let sql_query = `SELECT * FROM employee`;
+db.query(sql_query, (err, rows) => {
+  const employees = rows.map(element => {
+    return {
+      name: `${element.first_name} ${element.last_name}`,
+      value: element.employee_id
+    };
+  });
+
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'employeeId',
+      message: 'Which employee would you like to update?',
+      choices: employees
+    }
+  ]).then(updateInput1 => {
+    db.query('SELECT * FROM role', (err, res) => {
+      const roles = res.map(function (role) {
+        return {
+          name: role.title,
+          value: role.role_id
+        };
+      });
+      inquirer.prompt([
+        {
+          type: 'list',
+          name: 'roleId',
+          message: 'What is the employees new role?',
+          choices: roles
+        }
+      ]).then(updateInput2 => {
+        const sql_query1 = `UPDATE employee SET employee.role_id = ? WHERE employee.employee_id = ?`;
+        params = [updateInput2.roleId, updateInput1.employeeId];
+        db.query(sql_query1, params, (err, rows) => {
+          let placeholderPos;
+          for (let i = 0; i < roles.length; i++) {
+            if(roles[i].value == updateInput1.role_id) {
+              placeholderPos = roles[i].name;
+            }          
+          }
+          let placeholderName;
+          for (let j = 0; j < employees.length; j++) {
+            if(employees[j].value == updateInput2.employee_id) {
+            placeholderName = employees[j].name;
+            }
+          }
+          if(rows.changedRows === 1) {
+            console.log(`You have updated ${placeholderName} to ${placeholderPos}`);
+          } else {
+            console.log(`Error: ${placeholderName} is still ${placeholderPos}`);
+        }
+        restart();
+        });
+      });
+    });
+  });
+});
+};
 
 
 
