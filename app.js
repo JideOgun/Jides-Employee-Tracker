@@ -8,26 +8,25 @@ const cTable = require('console.table');
 const { commit } = require('./db/connection');
 
 
-const promptStart = () => {
+const promptStart = async () => {
 
-return inquirer.prompt([
-    
-    {     
-        type: 'list',
-        name: 'startlist',
-        message: 'What would you like to do? (Select one of the following)',
-        choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role']
+  const answers = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'startlist',
+      message: 'What would you like to do? (Select one of the following)',
+      choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role', 'Delete role']
     }
-]).then((answers) => {
+  ]);
   // VIEW ALL DEPARTMENTS
-if(answers.startlist === 'View all departments') {
-     displayDept();    
+  if (answers.startlist === 'View all departments') {
+    displayDept();
   } // VIEW ALL ROLES
   else if (answers.startlist === 'View all roles') {
     displayRole();
   } // VIEW ALL EMPLOYEES
-  else if(answers.startlist === 'View all Employees') {
-   displayEmployees();
+  else if (answers.startlist === 'View all Employees') {
+    displayEmployees();
   } // ADD A DEPARTMENT
   else if (answers.startlist === 'Add Departments') {
     addDept();
@@ -39,8 +38,9 @@ if(answers.startlist === 'View all departments') {
     addEmployee();
   } else if (answers.startlist === 'Update Employee Role') {
     updateEmp();
+  } else if (answers.startlist === 'Delete role') {
+    deleteRole();
   }
-});
 };
 
 const displayRole = () => {
@@ -271,9 +271,6 @@ db.query(sql_query, (err, rows) => {
         db.query(sql_query1, params, (err, rows) => {
           let placeholderPos;
           for (let i = 0; i < roles.length; i++) {
-            // console.log(roles[i].value)
-            // console.log(updateInput1.roleId)
-            // console.log(roles[i].name)
             if(roles[i].value == updateInput2.roleId) {
               placeholderPos = roles[i].name;
             }          
@@ -297,10 +294,36 @@ db.query(sql_query, (err, rows) => {
 });
 };
 
-
-
-
-
+//FUNCTION TO REMOVE ROLE
+const deleteRole = () => {
+let sql1 = `SELECT * FROM role`;
+db.query(sql1, (err,rows) => {
+  if(err) {
+    console.log(err);
+  }
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'roleId',
+      message: 'Select the role to delete',
+      choices: rows.map(roles => {
+        return { name: `${roles.title}`, value: roles.role_id};
+      })
+    }
+  ])
+  .then(answer => {
+    let sql2 = `DELETE FROM role WHERE ?`;
+    params = [{role_id: answer.roleId}];
+    db.query(sql2, params,  (err, res) => {
+      if(err) {
+        console.log(err);
+      }
+      console.log("Role has been deleted!");
+      restart();
+    });
+  });
+});
+};
 
 const Quit = () => {
 console.log('Goodbye!');
