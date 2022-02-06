@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const db = require('./db/connection');
 const cTable = require('console.table');
+const { commit } = require('./db/connection');
 
 
 const promptStart = () => {
@@ -266,16 +267,20 @@ db.query(sql_query, (err, rows) => {
       ]).then(updateInput2 => {
         const sql_query1 = `UPDATE employee SET employee.role_id = ? WHERE employee.employee_id = ?`;
         params = [updateInput2.roleId, updateInput1.employeeId];
+        console.log(params);
         db.query(sql_query1, params, (err, rows) => {
           let placeholderPos;
           for (let i = 0; i < roles.length; i++) {
-            if(roles[i].value == updateInput1.role_id) {
+            // console.log(roles[i].value)
+            // console.log(updateInput1.roleId)
+            // console.log(roles[i].name)
+            if(roles[i].value == updateInput2.roleId) {
               placeholderPos = roles[i].name;
             }          
           }
           let placeholderName;
           for (let j = 0; j < employees.length; j++) {
-            if(employees[j].value == updateInput2.employee_id) {
+            if(employees[j].value == updateInput1.employeeId) {
             placeholderName = employees[j].name;
             }
           }
