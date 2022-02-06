@@ -15,7 +15,7 @@ const promptStart = async () => {
       type: 'list',
       name: 'startlist',
       message: 'What would you like to do? (Select one of the following)',
-      choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role', 'Delete role']
+      choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role', 'Delete role', 'View by Manager', 'Delete Employee', 'Delete Deaprtment']
     }
   ]);
   // VIEW ALL DEPARTMENTS
@@ -40,6 +40,12 @@ const promptStart = async () => {
     updateEmp();
   } else if (answers.startlist === 'Delete role') {
     deleteRole();
+  } else if (answers.startlist === 'View by Manager') {
+    displayByManager();
+  }  else if (answers.startlist === 'Delete Employee') {
+    deleteEmployee();
+  } else if (answers.startlist === 'Delete Deaprtment') {
+    deleteDept();
   }
 };
 
@@ -97,6 +103,20 @@ const displayEmployees = () => {
 }); 
 };
 
+// DISPLAY EMPLOYEES BY MANAGER
+const displayByManager = () => {
+const sql = `SELECT employee.first_name, employee.last_name, role.manager
+ from employee INNER JOIN role ON employee.role_id = role.role_id`;
+db.query(sql, (err, rows) => {
+  if(err) {
+    console.log(err);
+  }
+  console.table(rows);
+  restart();
+});
+};
+
+
 
 // ADD DEPARTMENT FUNCTION
 const addDept = () => {
@@ -130,6 +150,36 @@ if(err) {
    });
    restart();
  });
+};
+
+//DELETE DEPARTMENT FUNCTION
+const deleteDept = () => {
+let sql1 = `SELECT * FROM department`;
+db.query(sql1, (err, row) => {
+  if(err) {
+    console.log(err);
+  }
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'deptId',
+      message: 'Select the department to delete',
+      choices: row.map(dept => {
+        return { name: `${dept.name}`, value: dept.dept_id};
+      })
+    }
+  ]).then(answer => {
+    let sql2 = `DELETE FROM department WHERE ?`;
+    params = [{ dept_id: answer.deptId}];
+    db.query(sql2, params, (err, res) => {
+      if(err) {
+        console.log(err);
+      }
+      console.log('Department has been deleted!');
+      restart();
+    });
+  });
+});
 };
 
 // ADD A ROLE FUNCTION
@@ -292,6 +342,39 @@ db.query(sql_query, (err, rows) => {
     });
   });
 });
+};
+
+// DELETE EMPLOYEE FUNCTION 
+const deleteEmployee = () => {
+let sql1 = `SELECT * FROM employee`;
+db.query(sql1, (err, rows) => {
+  if(err) {
+    console.log(err);
+  }
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'employeeId',
+      message: 'Select employee to delete',
+      choices: rows.map(emp => {
+        return { name: `${emp.first_name} ${emp.last_name}`,
+         value: emp.employee_id};
+      })
+    }
+  ])
+  .then(answer => {
+  let sql2 = `DELETE FROM employee WHERE ?`;
+  let params = [{ employee_id: answer.employeeId}];
+  db.query(sql2, params, (err, res) => {
+    if(err) {
+      console.log(err);
+    }
+    console.log("Employee has been deleted");
+    restart();
+  });
+});
+});
+
 };
 
 //FUNCTION TO REMOVE ROLE
