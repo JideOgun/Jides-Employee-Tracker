@@ -1,9 +1,9 @@
 # Jides-Employee-Tracker
 
-# Note Taker
+# Employee-Tracker
 
 # Title
-### Jides-Note-Taker
+### Jides-Employee-Tracker
 ## Table of Contents
 ---
 1. [DESCRIPTION](#description)
@@ -48,8 +48,8 @@ THEN I am prompted to select an employee to update and their new role and this i
         Install Node, express, nodemon.
  ---
  ## USAGE INFORMATION
+        Do not enter an ID that is already in use or it will throw an error. Checking schema and seeds files for already used ID's is advised.
         Run in an express server environment.
-        Use npm run dev to run nodemon to automatically restart server after changes made to json file.
         Server restart is required for updated json file to render to page.
  ---
 ## CONTRIBUTION GUIDELINES
