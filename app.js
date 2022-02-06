@@ -8,6 +8,7 @@ const cTable = require('console.table');
 const { commit } = require('./db/connection');
 
 
+
 const promptStart = async () => {
 
   const answers = await inquirer.prompt([
@@ -15,7 +16,7 @@ const promptStart = async () => {
       type: 'list',
       name: 'startlist',
       message: 'What would you like to do? (Select one of the following)',
-      choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role', 'Delete role', 'View by Manager', 'Delete Employee', 'Delete Deaprtment']
+      choices: ['View all departments', 'View all roles', 'View all Employees', 'Add Departments', 'Add a role', 'Add an Employee', 'Update Employee Role', 'Delete role', 'View by Manager', 'Delete Employee', 'Delete Department']
     }
   ]);
   // VIEW ALL DEPARTMENTS
@@ -44,9 +45,9 @@ const promptStart = async () => {
     displayByManager();
   }  else if (answers.startlist === 'Delete Employee') {
     deleteEmployee();
-  } else if (answers.startlist === 'Delete Deaprtment') {
+  } else if (answers.startlist === 'Delete Department') {
     deleteDept();
-  }
+  } 
 };
 
 const displayRole = () => {
@@ -317,7 +318,7 @@ db.query(sql_query, (err, rows) => {
       ]).then(updateInput2 => {
         const sql_query1 = `UPDATE employee SET employee.role_id = ? WHERE employee.employee_id = ?`;
         params = [updateInput2.roleId, updateInput1.employeeId];
-        console.log(params);
+        
         db.query(sql_query1, params, (err, rows) => {
           let placeholderPos;
           for (let i = 0; i < roles.length; i++) {
@@ -407,6 +408,7 @@ db.query(sql1, (err,rows) => {
   });
 });
 };
+
 
 const Quit = () => {
 console.log('Goodbye!');

@@ -63,7 +63,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 ---
 
 ## Walkthrough Video
-   * [Walkthrough Video]()
+   * [Walkthrough Video](https://youtu.be/99Ohcqrg3Tk)
    
 ---
 ## Questions
